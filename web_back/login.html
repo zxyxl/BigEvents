@@ -31,6 +31,8 @@
 
     </div>
     <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="tools/config.js"></script>
+    <script src="tools/user.js"></script>
     <script>
         var $input_txt = $('.input_txt');
         var $input_pass = $('.input_pass');
@@ -42,20 +44,16 @@
                 alert('请正确输入用户名或密码');
                 return;
             }
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:8000/admin/login',
+            user.login({
                 data: {
                     user_name: username,
                     password: password
                 },
-                success: function (res) {
-                    // console.log(res);
-                    if (res.code === 200) {
-                        location.href = 'index.html';
-                    } else {
-                        alert('用户名或密码错误！');
-                    }
+                success: function () {
+                    location.href = 'index.html';
+                },
+                fail: function () {
+                    alert('用户名或密码错误！');
                 }
             })
         })
