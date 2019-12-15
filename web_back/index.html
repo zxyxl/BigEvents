@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
     <script src="js/jquery-1.12.4.min.js"></script>
 </head>
 
@@ -59,7 +60,25 @@
             scrolling="auto"></iframe>
     </div>
 
-
+    <!-- 下面是模态框的结构部分 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">提示信息</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                    <!-- <button type="button" class="btn btn-primary">确定</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 页面的动态效果 -->
     <script>
         var $level01 = $('.level01');
@@ -110,13 +129,13 @@
         }
 
     </script>
-
+    <script src="js/bootstrap/js/bootstrap.min.js"></script>
     <script src="tools/user.js"></script>
     <script src="tools/config.js"></script>
     <script>
-        var logout = $('#logout');
-
-        logout.on('click', function () {
+        var $logout = $('#logout');
+        var $myModal = $('#myModal');
+        $logout.on('click', function () {
             if (!confirm('确认要退出登录吗？')) {
                 return;
             }
@@ -125,7 +144,7 @@
                     location.href = 'login.html';
                 },
                 fail: function () {
-                    alert('退出失败，请稍后重试');
+                    $myModal.modal('show').find('.modal-body').text('退出失败，请稍后重试!');
                 }
             })
         })
