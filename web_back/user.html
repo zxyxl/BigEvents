@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for="user_pic" class="col-sm-2 control-label">用户图标：</label>
                     <div class="col-sm-10">
-                        <img src="images/2.jpg" alt="" class="user_pic">
+                        <img src="images/2.jpg" alt="" class="user_pic" id="avatar">
                         <input type="file" id="user_pic" name="user_pic">
                     </div>
                 </div>
@@ -97,6 +97,13 @@
                     parent.location.href = 'login.html';
                 }
             })
+        });
+        // 图片预览
+        $('#user_pic').on('change', function () {
+            var tempSrc = URL.createObjectURL($(this)[0].files[0]);
+            console.log(tempSrc);
+
+            $('#avatar').prop('src', tempSrc);
         })
 
 
