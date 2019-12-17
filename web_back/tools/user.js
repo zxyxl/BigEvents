@@ -43,5 +43,31 @@ var user = {
                 }
             }
         })
+    },
+    userinfoGet: function (options) {
+        $.ajax({
+            url: USERINFO_GET,
+            success: function (res) {
+                // console.log(res);
+                if (res.code === 200) {
+                    options.success(res);
+                }
+            }
+        })
+    },
+    userinfoEdit: function (options) {
+        $.ajax({
+            type: 'POST',
+            url: USERINFO_EDIT,
+            data: options.data,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                // console.log(res);
+                if (res.code === 200) {
+                    options.success();
+                }
+            }
+        })
     }
 }
