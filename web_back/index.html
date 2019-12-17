@@ -147,6 +147,15 @@
                     $myModal.modal('show').find('.modal-body').text('退出失败，请稍后重试!');
                 }
             })
+        });
+        user.getuser({
+            success: function (res) {
+                $('.user_info img,.user_center_link img').prop('src', res.data.user_pic);
+                $('.user_info span').text('欢迎　' + res.data.nickname);
+            },
+            fail: function () {
+                $myModal.modal('show').find('.modal-body').text('获取信息失败，请重试!');
+            }
         })
 
     </script>

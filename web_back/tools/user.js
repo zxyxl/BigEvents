@@ -30,5 +30,18 @@ var user = {
                 }
             }
         })
+    },
+    getuser: function (options) {
+        $.ajax({
+            url: GETUSER,
+            success: function (res) {
+                // options.success(res);
+                if (res.code === 200) {
+                    options.success(res);
+                } else {
+                    options.fail();
+                }
+            }
+        })
     }
 }
