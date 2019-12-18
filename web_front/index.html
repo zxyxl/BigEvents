@@ -28,23 +28,23 @@
         <div class="menu">
             <div class="menu_collapse fl">
                 <a href="javascript:;" class="level_one"><i class="fa fa-list-ul"></i>全部分类</a>
-                <ul class="level_two">
+                <ul class="level_two" id="levelTwo">
                     <li class="up"></li>
-                    <li><a href="#">最 新</a></li>
+                    <!-- <li><a href="#">最 新</a></li>
                     <li><a href="#">科 技</a></li>
                     <li><a href="#">股 市</a></li>
                     <li><a href="#">商 品</a></li>
                     <li><a href="#">外 汇</a></li>
-                    <li><a href="#">公 司</a></li>
+                    <li><a href="#">公 司</a></li> -->
                 </ul>
             </div>
-            <ul class="left_menu fl">
-                <li><a href="#">最 新</a></li>
+            <ul class="left_menu fl" id="leftMenu">
+                <!-- <li><a href="#">最 新</a></li>
                 <li><a href="#">科 技</a></li>
                 <li><a href="#">股 市</a></li>
                 <li><a href="#">商 品</a></li>
                 <li><a href="#">外 汇</a></li>
-                <li><a href="#">公 司</a></li>
+                <li><a href="#">公 司</a></li> -->
             </ul>
             <ul class="right_menu fr">
                 <li><a href="#">科技专题</a></li>
@@ -55,8 +55,8 @@
 
     <div class="main_con clearfix">
         <div class="left_con">
-            <ul class="focus_list">
-                <li class="first">
+            <ul class="focus_list" id='focusList'>
+                <!-- <li class="first">
                     <a href="#"><img src="images/pic01.jpg" alt=""></a>
                     <p>图片说明</p>
                 </li>
@@ -75,7 +75,7 @@
                 <li>
                     <a href="#"><img src="images/pic06.jpg" alt=""></a>
                     <p>图片说明</p>
-                </li>
+                </li> -->
             </ul>
 
             <div class="common_title">
@@ -215,12 +215,46 @@
             <span>|</span>
             <a href="#">招聘人才</a>
             <span>|</span>
-            <a href="#">友情链接</a>		
+            <a href="#">友情链接</a>
         </div>
-        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司   All Rights Reserved</p>
-        <p>电话：0755-****888    粤ICP备*******8号</p>
+        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
+        <p>电话：0755-****888 粤ICP备*******8号</p>
     </div>
-
+    <script src="js/template-web.js"></script>
+    <script src="js/axios.js"></script>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/template" id="focus_list">
+        {{each data val i}}
+        <li {{if i===0}}class="first"{{/if}}>
+            <a href="#"><img src="{{val.cover}}" alt=""></a>
+            <p>{{val.title}}</p>
+        </li>
+        {{/each}}
+    </script>
+    <script type="text/template" id="left_menu">
+        {{each data val i}}
+        <li><a href="list.html?id={{val.id}}">{{val.name}}</a></li>
+        {{/each}}
+    </script>
+    <script>
+        axios.get('http://localhost:8000/admin/search', { params: { perpage: 5 } }).then(
+            function (res) {
+                // console.log(res);
+                if (res.data.code === 200) {
+                    $('#focusList').html(template('focus_list', res.data));
+                }
+            }
+        );
+        axios.get('http://localhost:8000/admin/category_search').then(
+            function (res) {
+                // console.log(res);
+                if (res.data.code === 200) {
+                    $('#leftMenu').html(template('left_menu', res.data));
+                    $('#levelTwo').append(template('left_menu', res.data));
+                }
+            }
+        )
+    </script>
 </body>
 
 </html>
