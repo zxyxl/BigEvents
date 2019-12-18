@@ -53,5 +53,20 @@ var article = {
                 }
             }
         })
+    },
+    articlePublish: function (options) {
+        $.ajax({
+            type: 'POST',
+            url: ARTICLE_PUBLISH,
+            data: options.data,
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                // console.log(res);
+                if (res.code === 201) {
+                    options.success();
+                }
+            }
+        })
     }
 }

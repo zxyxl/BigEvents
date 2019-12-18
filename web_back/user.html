@@ -101,8 +101,7 @@
         // 图片预览
         $('#user_pic').on('change', function () {
             var tempSrc = URL.createObjectURL($(this)[0].files[0]);
-            console.log(tempSrc);
-
+            // console.log(tempSrc);
             $('#avatar').prop('src', tempSrc);
         })
 
